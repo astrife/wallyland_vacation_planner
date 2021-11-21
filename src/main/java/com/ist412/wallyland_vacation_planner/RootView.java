@@ -16,6 +16,7 @@ public class RootView extends JFrame {
     private final String START_PAGE = "START PAGE";
     private final String LOGIN_PAGE = "LOGIN PAGE";
     private final String CREATE_ACCOUNT_PAGE = "CREATE ACCOUNT PAGE";
+    private final String DASHBOARD = "DASHBOARD";
     private final CardLayout cLayout;
     private final JPanel mainPane;
     
@@ -90,6 +91,10 @@ public class RootView extends JFrame {
                     loginEmailText.getText(), 
                     loginPasswordText.getText(), 
                     loginStatusLabel);
+            
+            if (LoginController.getInstance().getCurrentUser() != null) {
+                RootController.getInstance().swapPage(cLayout, mainPane, DASHBOARD);
+            }
         });
         
         loginButtonPanel.add(loginButton);
@@ -147,7 +152,7 @@ public class RootView extends JFrame {
                 userName.getText(),
                 createPasswordText.getText(),
                 (String) accountSelect.getSelectedItem());
-            RootController.getInstance().swapPage(cLayout, mainPane, START_PAGE);
+            RootController.getInstance().swapPage(cLayout, mainPane, DASHBOARD);
         });
         submitButtonPanel.add(submitButton);
         
@@ -160,6 +165,20 @@ public class RootView extends JFrame {
         createAccountPage.add(createPasswordPanel);
         createAccountPage.add(submitButtonPanel);
         mainPane.add(CREATE_ACCOUNT_PAGE, createAccountPage);
+        
+        // Add dashboard components
+        JPanel dashboard = new JPanel();
+        dashboard.setLayout(new BorderLayout());
+        
+        JPanel planTripButtonPanel = new JPanel();
+        JButton planTripButton = new JButton("Plan your trip!");
+        planTripButton.addActionListener((ActionEvent e) -> {
+            DashboardController.getInstance().launchPlanTrip();
+        });
+        planTripButtonPanel.add(planTripButton);
+        dashboard.add(planTripButtonPanel, BorderLayout.CENTER);
+        
+        mainPane.add(DASHBOARD, dashboard);
         
         // Add plan trip components
         
