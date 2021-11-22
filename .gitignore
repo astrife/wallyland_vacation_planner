@@ -1,4 +1,5 @@
 /target/
 
 *.ser
+*.png
 /src/main/java/com/ist412/wallyland_vacation_planner/planning_trip/JavaApplication117/build/
