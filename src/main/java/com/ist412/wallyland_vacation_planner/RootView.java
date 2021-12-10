@@ -169,18 +169,31 @@ public class RootView extends JFrame {
         // Add dashboard components
         JPanel dashboard = new JPanel();
         dashboard.setLayout(new BorderLayout());
+        JPanel ButtonPanel = new JPanel();
         
-        JPanel planTripButtonPanel = new JPanel();
+        // Add button to launch plan trip use case
         JButton planTripButton = new JButton("Plan your trip!");
         planTripButton.addActionListener((ActionEvent e) -> {
             DashboardController.getInstance().launchPlanTrip();
         });
-        planTripButtonPanel.add(planTripButton);
-        dashboard.add(planTripButtonPanel, BorderLayout.CENTER);
+        ButtonPanel.add(planTripButton);
         
+        // Add button to launch order food use case
+        JButton orderFoodButton = new JButton("Order some food!");
+        orderFoodButton.addActionListener((ActionEvent e) -> {
+           DashboardController.getInstance().launchOrderFood();
+        });
+        ButtonPanel.add(orderFoodButton);
+        
+        // Add button for showing ride tickets
+        JButton showRideTicketButton = new JButton("Display your ticket!");
+        showRideTicketButton.addActionListener((ActionEvent e) -> {
+            DashboardController.getInstance().launchShowRideTicket();
+        });
+        ButtonPanel.add(showRideTicketButton);
+        
+        dashboard.add(ButtonPanel, BorderLayout.CENTER);
         mainPane.add(DASHBOARD, dashboard);
-        
-        // Add plan trip components
         
         // Window close operation
         this.addWindowListener(new WindowAdapter() {

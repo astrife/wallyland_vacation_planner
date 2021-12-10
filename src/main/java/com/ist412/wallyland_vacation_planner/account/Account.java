@@ -1,50 +1,107 @@
 package com.ist412.wallyland_vacation_planner.account;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 /**
  * Interface to provide common interaction with all the Account classes.
  * 
  * @author Jason C. Nucciarone
- * @version 1.0
- * @since 2021-10-24
+ * @version 2.0
+ * @since 2021-11-21
  */
-public interface Account {
+public class Account implements Serializable {
+    private int accountID;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String userName;
+    private String accountType;
+    private String password;
+    private final HashMap<String, Object> accountInfo;
+
+    public Account(int accountID, String firstName, String lastName, String email, String userName, String password, String accountType) {
+        this.accountID = accountID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.userName = userName;
+        this.password = password;
+        this.accountType = accountType;
+        this.accountInfo = new HashMap<>();
+    }
+    
     // Getter methods for retrieving information
-    int getAccountID();
+    public int getAccountID() {
+        return accountID;
+    }
     
-    String getFirstName();
+    public String getFirstName() {
+        return firstName;
+    }
     
-    String getLastName();
+    public String getLastName() {
+        return lastName;
+    }
     
-    String getEmail();
+    public String getEmail() {
+        return email;
+    }
     
-    String getUserName();
+    public String getUserName() {
+        return userName;
+    }
     
-    String getAccountType();
+    public String getAccountType() {
+        return accountType;
+    }
     
-    HashMap<String, Object> getAccountInfo();
+    public HashMap<String, Object> getAccountInfo() {
+        return accountInfo;
+    }
     
-    Object getAccountInfoByKey(String key);
+    public Object getAccountInfoByKey(String key) {
+        return accountInfo.get(key);
+    }
     
-    String getPassword();
+    public String getPassword() {
+        return password;
+    }
     
     // Setter methods for defaulting to new information
-    void setAccountID(int newID);
+    public void setAccountID(int newID) {
+        this.accountID = newID;
+    }
     
-    void setFirstName(String newFirstName);
+    public void setFirstName(String newFirstName) {
+        this.firstName = newFirstName;
+    }
     
-    void setLastName(String newLastName);
+    public void setLastName(String newLastName) {
+        this.lastName = newLastName;
+    }
     
-    void setEmail(String newEmail);
+    public void setEmail(String newEmail) {
+        this.email = newEmail;
+    }
     
-    void setUserName(String newUserName);
+    public void setUserName(String newUserName) {
+        this.userName = newUserName;
+    }
     
-    void setAccountType(String newType);
+    public void setAccountType(String newType) {
+        this.accountType = newType;
+    }
     
-    void setPassword(String newPassword);
+    public void setPassword(String newPassword) {
+        this.password = newPassword;
+    }
     
-    void pushAccountInfo(String newKey, Object newValue);
+    public void pushAccountInfo(String newKey, Object newValue) {
+        this.accountInfo.put(newKey, newValue);
+    }
     
-    void popAccountInfo(String oldKey);
+    public void popAccountInfo(String oldKey) {
+        this.accountInfo.remove(oldKey);
+    }
 }
