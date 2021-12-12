@@ -8,8 +8,8 @@ import javax.swing.*;
  * Controller class to handle user login at application start.
  * 
  * @author Jason C. Nucciarone
- * @version 1.0
- * @since 2021-11-7
+ * @version 1.1
+ * @since 2021-12-10
  */
 public class LoginController {
     private static LoginController controllerInstance = null;
@@ -39,5 +39,9 @@ public class LoginController {
 
     public Account getCurrentUser() {
         return currentUser;
+    }
+    
+    public void setCurrentUser(Account user) {
+        this.currentUser = user;
     }
 }

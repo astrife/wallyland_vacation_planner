@@ -83,7 +83,13 @@ public class RootView extends JFrame {
         loginPage.add(loginInputPanel, BorderLayout.CENTER);
         
         JPanel loginButtonPanel = new JPanel();
+        JButton loginBackButton = new JButton("Back");
         JButton loginButton = new JButton("Log In");
+        
+        //// Add back button
+        loginBackButton.addActionListener((ActionEvent e) -> {
+            RootController.getInstance().swapPage(cLayout, mainPane, START_PAGE);
+        });
         
         //// Add login action listener
         loginButton.addActionListener((ActionEvent e) -> {
@@ -97,6 +103,7 @@ public class RootView extends JFrame {
             }
         });
         
+        loginButtonPanel.add(loginBackButton);
         loginButtonPanel.add(loginButton);
         loginPage.add(loginButtonPanel, BorderLayout.SOUTH);
         mainPane.add(LOGIN_PAGE, loginPage);
@@ -143,7 +150,9 @@ public class RootView extends JFrame {
         createPasswordPanel.add(createPasswordText);
         
         JPanel submitButtonPanel = new JPanel();
+        JButton submitBackButton = new JButton("Back");
         JButton submitButton = new JButton("Create Account");
+        
         submitButton.addActionListener((ActionEvent e) -> {
             SignUpController.getInstance().createAccount(
                 firstName.getText(), 
@@ -152,8 +161,15 @@ public class RootView extends JFrame {
                 userName.getText(),
                 createPasswordText.getText(),
                 (String) accountSelect.getSelectedItem());
+            JOptionPane.showMessageDialog(this, "Account created sucessfully");
             RootController.getInstance().swapPage(cLayout, mainPane, DASHBOARD);
         });
+        
+        submitBackButton.addActionListener((ActionEvent e) -> {
+            RootController.getInstance().swapPage(cLayout, mainPane, START_PAGE);
+        });
+        
+        submitButtonPanel.add(submitBackButton);
         submitButtonPanel.add(submitButton);
         
         createAccountPage.add(createAccountTitle);
@@ -191,6 +207,13 @@ public class RootView extends JFrame {
             DashboardController.getInstance().launchShowRideTicket();
         });
         ButtonPanel.add(showRideTicketButton);
+        
+        // Add button for logging out
+        JButton logoutButton = new JButton("Log out");
+        logoutButton.addActionListener((ActionEvent e) -> {
+            LoginController.getInstance().setCurrentUser(null);
+            RootController.getInstance().swapPage(cLayout, mainPane, START_PAGE);
+        });
         
         dashboard.add(ButtonPanel, BorderLayout.CENTER);
         mainPane.add(DASHBOARD, dashboard);
